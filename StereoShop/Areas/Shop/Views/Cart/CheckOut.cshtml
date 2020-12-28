@@ -1,0 +1,46 @@
+﻿@model List<Product>
+@{
+    ViewBag.Title = "Your Receipt";
+}
+
+<div class="text-center">
+    <h3>Purchase Receipt</h3>
+
+    <div class="col-8 offset-2">
+        <ul class="list-group">
+            @foreach (Product product in Model)
+            {
+                string imageFile = product.Code + ".jpg";
+                double lineTotal = product.Price * product.Quantity;
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3">
+                            @(product.Name + " " + product.Category) <br />
+                            <img src="~/images/@imageFile" height="100" />
+                        </div>
+                        <div class="col-3">
+                            Price per unit: <br />
+                            @product.Price.ToString("C")
+                        </div>
+                        <div class="col-3">
+                            Qty: @product.Quantity
+                        </div>
+                        <div class="col-3">
+                            Line Total: <br />
+                            @lineTotal.ToString("C")
+                        </div>
+                    </div>
+                </li>
+            }
+                
+                <li class="list-group-item">
+                    <p class="font-weight-bold">
+                        Total Cost: @ViewBag.TotalCost.ToString("C")
+                    </p>
+                </li>
+        </ul>
+
+        <h4>Thank you for your purchase!</h4>
+    </div>
+</div>

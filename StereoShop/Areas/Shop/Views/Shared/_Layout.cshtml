@@ -1,0 +1,63 @@
+﻿@{ 
+    var session = new StereoShopSession(Context.Session);
+}  
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+          integrity="sha-long-hash_code" crossorigin="anonymous">
+    <script href="~/lib/jquery/jquery.min.js"></script>
+    <script href="~/lib/popper.js/popper.min.js"></script>
+    <script href="~/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav mr-auto">
+            <li>
+                <a class="navbar-brand" asp-area="Shop" asp-controller="Home" asp-action="Index">Ian's Stereo Shop</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Shop" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Shop" asp-controller="Product" asp-action="List">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-secondary" asp-area="Shop" asp-controller="Cart" asp-action="Index">
+                    <span class="fas fa-shopping-cart"></span>
+                    &nbsp;Cart&nbsp;
+                    <span class="badge badge-dark">@session.GetCartProductCount()</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li>
+                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+            </li>
+        </ul>
+    </nav>
+
+    @if (TempData["message"] != null)
+    {
+        <h4 class="text-center bg-primary p-2">@TempData["message"]</h4>
+    }
+
+    <div class="main-div">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - Ian Van Harten</p>
+    </footer>
+
+</body>
+</html>

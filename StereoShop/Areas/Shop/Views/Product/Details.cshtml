@@ -1,0 +1,37 @@
+﻿@model Product
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<a asp-area="Shop" asp-controller="Product" 
+   asp-action="List">&lt;&lt;Back to Products</a>
+<h1>Product Details</h1>
+
+<h2>@(Model.Name + " " + Model.Category.Name)</h2>
+
+<div class="row">
+    <div class="col-sm-4">
+        <img src="~/images/@ViewBag.ImageFile"
+             alt="@Model.Name"
+             width="300" />
+    </div>
+
+    <div class="col-sm-8">
+        <table class="table table-bordered">
+            <tr>
+                <td>List Price:</td>
+                <td>@Model.Price.ToString("C")</td>
+            </tr>
+        </table>
+
+        <form asp-area="Shop" asp-controller="Product" asp-action="Add" method="post">
+            <label asp-for="Quantity">Quantity</label>
+            <input asp-for="Quantity" type="number" value="1" min="1" />
+            <input asp-for="ProductId" type="hidden" />
+            <button type="submit" class="btn btn-success">Add to Cart</button>
+        </form>
+
+    </div>
+</div>
+
+

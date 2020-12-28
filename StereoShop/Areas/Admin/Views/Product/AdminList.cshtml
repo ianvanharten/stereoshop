@@ -1,0 +1,53 @@
+﻿@model List<Product>
+@{
+    ViewBag.Title = "Product Manager";
+}
+
+<h1>@ViewBag.Title</h1>
+<div class="btn-group" role="group">
+    <a asp-area="Admin" asp-action="AdminList" asp-route-id="All"
+       class="btn btn-outline-dark 
+       @if (ViewBag.SelectedCategory == "All")
+       { <text>active</text> } ">All</a>
+
+    @foreach (Category c in ViewBag.Categories)
+    {
+        <a asp-area="Admin" asp-action="AdminList" asp-route-id="@c.Name" class="btn btn-outline-dark 
+           @(ViewBag.SelectedCategory == c.Name ? "active" : "")">
+            @c.Name
+        </a>
+    }
+</div>
+
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Price.ToString("C")</td>
+            <td>
+                <a asp-action="Update" asp-route-id="@p.ProductId">
+                    Update
+                </a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@p.ProductId">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Add" class="btn btn-dark">Add New Product</a>
